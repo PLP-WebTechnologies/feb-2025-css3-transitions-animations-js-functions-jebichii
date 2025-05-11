@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation & Local Storage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button id="animateButton" class="button">Animation</button>
+
+    <img id="animatedElement" class="image" src="https://images.pexels.com/photos/8349392/pexels-photo-8349392.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load" alt="Animated Image">
+
+    <script>
+        function savePreference(key, value) {
+            localStorage.setItem(key, value);
+        }
+
+        function getPreference(key) {
+            return localStorage.getItem(key);
+        }
+
+        document.getElementById("animateButton").addEventListener("click", function () {
+            let element = document.getElementById("animatedElement");
+            element.style.animation = "fadeIn 1s ease-in-out";
+
+            // Save user interaction preference
+            savePreference("lastAction", "clickedAnimateButton");
+        });
+
+        // Retrieve preference and apply changes accordingly
+        window.onload = function () {
+            if (getPreference("lastAction") === "clickedAnimateButton") {
+                document.getElementById("animatedElement").style.animation = "fadeIn 1s ease-in-out";
+            }
+        };
+    </script>
+
+</body>
+</html>
